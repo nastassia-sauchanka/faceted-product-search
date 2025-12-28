@@ -1,3 +1,3 @@
 # FacetedProductSearch
 
-Deploy link: https://projectsearchfacets.netlify.app/search
+Deploy link: https://6951a4ab4e7a930008385b91--projectsearchfacets.netlify.app/search
