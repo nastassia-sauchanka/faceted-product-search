@@ -1,0 +1,101 @@
+<div class="search-wrapper">
+  <header class="search-header">
+    <div class="search-searchbar">
+      <input
+        type="text"
+        placeholder="Search products..."
+        [(ngModel)]="queryInput"
+        (keydown.enter)="applySearch()"
+      />
+      <button (click)="applySearch()">Search</button>
+    </div>
+
+    <div>
+      @if (loading) {
+        <span>Loading...</span>
+      } @else {
+        <span>Results: {{ totalCount }}</span>
+      }
+    </div>
+  </header>
+
+  <main class="search-main">
+    <aside class="search-facets">
+      <div class="search-facetHeader">
+        <span>Filters</span>
+      </div>
+
+      <section class="search-facet">
+        <div class="search-facet-title">Brand</div>
+        <div class="search-facetList">
+          @for (brand of facets.brands; track brand.id) {
+            <label class="search-facetItem">
+              <input
+                type="checkbox"
+                [checked]="isBrandSelected(brand.id)"
+                (change)="toggleBrand(brand.id)"
+              />
+              <span class="search-facetItem-name">{{ brand.name }}</span>
+              <span class="search-facetItem-count">{{ brand.count }}</span>
+            </label>
+          }
+        </div>
+      </section>
+
+      <section class="search-facet">
+        <div class="search-facet-title">Category</div>
+        <div class="search-facetList">
+          @for (category of facets.categories; track category.id) {
+            <label class="search-facetItem">
+              <input
+                type="checkbox"
+                [checked]="isCategorySelected(category.id)"
+                (change)="toggleCategory(category.id)"
+              />
+              <span class="search-facetItem-name">{{ category.name }}</span>
+              <span class="search-facetItem-count">{{ category.count }}</span>
+            </label>
+          }
+        </div>
+      </section>
+    </aside>
+
+    <section class="search-results">
+      @if (error) {
+        <div class="error">{{ error }}</div>
+      }
+
+      @if (!loading && products.length === 0) {
+        <p>No results</p>
+      }
+
+      <div class="search-cards">
+        @for (product of products; track product.id) {
+          <div class="search-card">
+            <div class="search-card-img">
+              @if (product.image) {
+                <img [src]="product.image" [alt]="product.name ?? product.id" />
+              } @else {
+                <div class="search-card-placeholder">No image</div>
+              }
+            </div>
+            <div class="search-card-title">{{ product.name || "(no name)" }}</div>
+          </div>
+        }
+      </div>
+
+      <div class="search-pagination">
+        <button (click)="prevPage()" [disabled]="page <= 0 || loading">Prev</button>
+        <span>
+          Page {{ page + 1 }} / {{ totalPages }}
+        </span>
+        <button
+          (click)="nextPage()"
+          [disabled]="loading || (page + 1) >= totalPages"
+        >
+          Next
+        </button>
+      </div>
+    </section>
+  </main>
+</div>

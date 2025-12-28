@@ -1,0 +1,164 @@
+.search {
+  &-wrapper {
+    padding: 16px;
+  }
+
+  &-header {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  &-searchbar {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+
+    input {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid lightgray;
+    }
+
+    button {
+      padding: 10px 12px;
+      border: 1px solid lightgray;
+      cursor: pointer;
+    }
+  }
+
+  &-main {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  &-facet {
+    &-title {
+      font-weight: 600;
+      font-size: 16px;
+      padding: 5px 0;
+    }
+  }
+
+  &-facetHeader {
+    font-weight: 600;
+    font-size: 18px;
+    padding: 10px 0;
+  }
+
+  &-facets {
+    padding: 12px;
+    width: 300px;
+  }
+
+  &-facetList {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+    max-height: 320px;
+    overflow: auto;
+  }
+
+  &-facetItem {
+    display: grid;
+    grid-template-columns: 18px 1fr auto;
+    gap: 8px;
+  }
+
+  &-results {
+    padding: 12px;
+    flex: 1;
+  }
+
+  &-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  &-card {
+    flex: 0 0 calc(25% - 5px);
+    border: 1px solid lightgray;
+
+    &-img {
+      height: 140px;
+      background: #fafafa;
+      display: grid;
+      place-items: center;
+
+      img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        display: block;
+      }
+    }
+
+    &-placeholder {
+      opacity: 0.6;
+    }
+
+    &-title {
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    &-id {
+      padding: 0 10px 10px;
+      opacity: 0.6;
+      font-size: 12px;
+    }
+  }
+
+  &-pagination {
+    margin-top: 12px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    button {
+      border: 1px solid lightgray;
+      padding: 8px 12px;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+.error {
+  border: 1px solid red;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 900px) {
+  .search {
+    &-main {
+      flex-direction: column;
+    }
+
+    &-facets {
+      width: 100%;
+    }
+
+    &-card {
+      flex: 0 0 calc(50% - 6px);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .search {
+    &-card {
+      flex: 0 0 100%;
+    }
+  }
+}
